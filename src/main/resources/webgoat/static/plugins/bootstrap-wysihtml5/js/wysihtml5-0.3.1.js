@@ -3,6 +3,9 @@
  * https://github.com/xing/wysihtml5
  *
  * Author: Christopher Blum (https://github.com/tiff)
+ 
+ 
+ 
  *
  * Copyright (C) 2012 XING AG
  * Licensed under the MIT license (MIT)

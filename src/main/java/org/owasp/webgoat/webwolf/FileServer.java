@@ -71,12 +71,12 @@ public class FileServer {
   }
 
   @PostMapping(value = "/fileupload")
-  public ModelAndView importFile(@RequestParam("file") MultipartFile myFile) throws IOException {
+  public ModelAndView importFile(@RequestParam("file") MultipartFile myFile1) throws IOException {
     var user = (WebGoatUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     var destinationDir = new File(fileLocation, user.getUsername());
     destinationDir.mkdirs();
-    myFile.transferTo(new File(destinationDir, myFile.getOriginalFilename()));
-    log.debug("File saved to {}", new File(destinationDir, myFile.getOriginalFilename()));
+    myFile1.transferTo(new File(destinationDir, myFile1.getOriginalFilename()));
+    log.debug("File saved to {}", new File(destinationDir, myFile1.getOriginalFilename()));
 
     return new ModelAndView(
         new RedirectView("files", true),

@@ -60,17 +60,17 @@
     <developer>
       <id>jwayman</id>
       <name>Jeff Wayman</name>
-      <email></email>
+      <email/>
     </developer>
     <developer>
       <id>dcowden</id>
       <name>Dave Cowden</name>
-      <email></email>
+      <email/>
     </developer>
     <developer>
       <id>lawson89</id>
       <name>Richard Lawson</name>
-      <email></email>
+      <email/>
     </developer>
     <developer>
       <id>dougmorato</id>
@@ -299,6 +299,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>2.7.16</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -521,8 +522,8 @@
               <includes>
                 <include>.gitignore</include>
               </includes>
-              <trimTrailingWhitespace></trimTrailingWhitespace>
-              <endWithNewline></endWithNewline>
+              <trimTrailingWhitespace/>
+              <endWithNewline/>
               <indent>
                 <tabs>true</tabs>
                 <spacesPerTab>4</spacesPerTab>
@@ -533,10 +534,10 @@
             <includes>
               <include>**/*.md</include>
             </includes>
-            <flexmark></flexmark>
+            <flexmark/>
           </markdown>
           <java>
-            <removeUnusedImports></removeUnusedImports>
+            <removeUnusedImports/>
             <googleJavaFormat>
               <style>GOOGLE</style>
               <reflowLongStrings>true</reflowLongStrings>

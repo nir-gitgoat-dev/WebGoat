@@ -120,17 +120,20 @@ server.address=x.x.x.x
 
 For specialist only. There is a way to set up WebGoat with a personalized menu. You can leave out some menu categories or individual lessons by setting certain environment variables.
 
+To restrict logins to specific email domains, set `WEBGOAT_USER_ALLOWED_EMAIL_DOMAINS` and `WEBWOLF_USER_ALLOWED_EMAIL_DOMAINS` to comma-separated domain lists such as `owasp.org,example.com`. Leave either setting blank only if you intentionally want that application to reject every login attempt until an allowlist is configured.
+
 For instance running as a jar on a Linux/macOS it will look like this:
 
 ```Shell
 export EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE"
 export EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations"
+export WEBGOAT_USER_ALLOWED_EMAIL_DOMAINS="owasp.org"
+export WEBWOLF_USER_ALLOWED_EMAIL_DOMAINS="owasp.org"
 java -jar target/webgoat-2023.3-SNAPSHOT.jar
 ```
 
 Or in a docker run it would (once this version is pushed into docker hub) look like this:
 
 ```Shell
-docker run -d -p 8080:8080 -p 9090:9090 -e TZ=Europe/Amsterdam -e EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE" -e EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations" webgoat/webgoat
+docker run -d -p 8080:8080 -p 9090:9090 -e TZ=Europe/Amsterdam -e EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE" -e EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations" -e WEBGOAT_USER_ALLOWED_EMAIL_DOMAINS="owasp.org" -e WEBWOLF_USER_ALLOWED_EMAIL_DOMAINS="owasp.org" webgoat/webgoat
 ```
-

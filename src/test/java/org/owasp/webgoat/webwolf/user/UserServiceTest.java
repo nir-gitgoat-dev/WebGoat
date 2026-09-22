@@ -24,6 +24,8 @@ package org.owasp.webgoat.webwolf.user;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +33,6 @@ import static org.mockito.Mockito.when;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,34 +42,34 @@ public class UserServiceTest {
 
   @Mock private UserRepository mockUserRepository;
 
-  @InjectMocks private UserService sut;
-
   @Test
   public void testLoadUserByUsername() {
     var username = "guest";
     var password = "123";
     WebGoatUser user = new WebGoatUser(username, password);
     when(mockUserRepository.findByUsername(username)).thenReturn(user);
+    UserService sut = new UserService(mockUserRepository, "owasp.org");
 
-    var webGoatUser = sut.loadUserByUsername(username);
+    var webGoatUser = sut.loadUserByUsername(username + "@OWASP.ORG");
 
     Assertions.assertThat(username).isEqualTo(webGoatUser.getUsername());
     Assertions.assertThat(password).isEqualTo(webGoatUser.getPassword());
+    verify(mockUserRepository).findByUsername(eq(username));
   }
 
   @Test
   public void testLoadUserByUsername_NULL() {
-    var username = "guest";
+    UserService sut = new UserService(mockUserRepository, "owasp.org");
 
-    when(mockUserRepository.findByUsername(username)).thenReturn(null);
-
-    assertThrows(UsernameNotFoundException.class, () -> sut.loadUserByUsername(username));
+    assertThrows(UsernameNotFoundException.class, () -> sut.loadUserByUsername("guest"));
+    verify(mockUserRepository, never()).findByUsername(any());
   }
 
   @Test
   public void testAddUser() {
     var username = "guest";
     var password = "guest";
+    UserService sut = new UserService(mockUserRepository, "owasp.org");
 
     sut.addUser(username, password);
 

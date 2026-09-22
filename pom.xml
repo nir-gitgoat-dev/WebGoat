@@ -653,7 +653,9 @@
                     <argument>-Dspring.main.banner-mode=off</argument>
                     <argument>-Dspring.datasource.url=jdbc:hsqldb:file:${java.io.tmpdir}/webgoat</argument>
                     <argument>-Dwebgoat.port=${webgoat.port}</argument>
+                    <argument>-Dwebgoat.user.allowed-email-domains=owasp.org</argument>
                     <argument>-Dwebwolf.port=${webwolf.port}</argument>
+                    <argument>-Dwebwolf.user.allowed-email-domains=owasp.org</argument>
                     <argument>--add-opens</argument>
                     <argument>java.base/java.lang=ALL-UNNAMED</argument>
                     <argument>--add-opens</argument>

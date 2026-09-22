@@ -16,7 +16,9 @@ public class UserForm {
 
   @NotNull
   @Size(min = 6, max = 45)
-  @Pattern(regexp = "[a-z0-9-]*", message = "can only contain lowercase letters, digits, and -")
+  @Pattern(
+      regexp = "[a-z0-9-]+@[A-Za-z0-9.-]+",
+      message = "must be an email address with a lowercase username")
   private String username;
 
   @NotNull

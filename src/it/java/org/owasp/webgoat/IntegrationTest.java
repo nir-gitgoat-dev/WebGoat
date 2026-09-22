@@ -28,6 +28,10 @@ public abstract class IntegrationTest {
     @Getter
     private String user = "webgoat";
 
+    private String loginUser() {
+        return this.getUser() + "@owasp.org";
+    }
+
     protected String url(String url) {
         url = url.replaceFirst("/WebGoat/", "");
         url = url.replaceFirst("/WebGoat", "");
@@ -47,7 +51,7 @@ public abstract class IntegrationTest {
         String location = given()
                 .when()
                 .relaxedHTTPSValidation()
-                .formParam("username", user)
+                .formParam("username", loginUser())
                 .formParam("password", "password")
                 .post(url("login")).then()
                 .cookie("JSESSIONID")
@@ -57,7 +61,7 @@ public abstract class IntegrationTest {
             webGoatCookie = RestAssured.given()
                     .when()
                     .relaxedHTTPSValidation()
-                    .formParam("username", user)
+                    .formParam("username", loginUser())
                     .formParam("password", "password")
                     .formParam("matchingPassword", "password")
                     .formParam("agree", "agree")
@@ -71,7 +75,7 @@ public abstract class IntegrationTest {
             webGoatCookie = given()
                     .when()
                     .relaxedHTTPSValidation()
-                    .formParam("username", user)
+                    .formParam("username", loginUser())
                     .formParam("password", "password")
                     .post(url("login")).then()
                     .cookie("JSESSIONID")
@@ -82,7 +86,7 @@ public abstract class IntegrationTest {
         webWolfCookie = RestAssured.given()
                 .when()
                 .relaxedHTTPSValidation()
-                .formParam("username", user)
+                .formParam("username", loginUser())
                 .formParam("password", "password")
                 .post(webWolfUrl("login"))
                 .then()
@@ -228,4 +232,3 @@ public abstract class IntegrationTest {
     }
 
 }
-
